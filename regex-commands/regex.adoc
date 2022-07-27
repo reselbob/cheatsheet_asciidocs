@@ -1,0 +1,382 @@
+= Regex Cheat Sheet
+:experimental: true
+:product-name: Regex Cheat Sheet
+
+
+== Quantifiers
+```
+a | b
+```
+
+```
+?
+```
+
+```
++
+```
+
+```
+*
+```
+
+```
+*?
+```
+
+```
+{ N }
+```
+
+```
+{ N, M }
+```
+== Standard Tokens
+
+```
+.
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+---
+
+```
+\n
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+---
+
+```
+\t
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+---
+
+```
+\s
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+---
+
+```
+\S
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+---
+
+```
+\w
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+---
+
+```
+\W
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+---
+
+```
+\b
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+---
+
+```
+\B
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+---
+
+```
+^
+```
+
+Example
+
+```
+echo -e 'Hi \nThere' | grep '^T'
+```
+
+Result:
+
+```
+There
+```
+
+---
+
+```
+$
+```
+
+```
+echo -e 'Hi\nThere' | grep 'i$'
+```
+
+Result:
+
+```
+Hi
+```
+
+---
+
+```
+\\
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+---
+
+== Pattern Matching
+
+```
+[A-Z]
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+---
+
+```
+[A-Z]
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+---
+
+```
+[0-9]
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+---
+
+```
+[asdf]
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+---
+
+```
+[^asdf]
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+== Flags
+
+```
+g
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+---
+
+```
+m
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+---
+
+```
+i
+```
+
+Example
+
+```
+TO BE PROVIDED
+```
+
+Result
+
+```
+TO BE PROVIDED
+```
+
+== Using RegEx to Search a File System
+
+== Using RegEx to Search a web page
+
+== Using Regex with GREP at the command line
+
