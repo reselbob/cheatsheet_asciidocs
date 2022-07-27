@@ -4,28 +4,140 @@
 
 
 == Quantifiers
-```
-a | b
-```
+
+=== Match according to a condition
 
 ```
-?
+x | y
 ```
 
-```
-+
-```
+WHERE `x` is a character and `y` is another character
+
+The following examples uses the `|` to search strings piped from the `echo` command that have either the character `f` or `g`. The option `-P` indicates parsing the given string according to Perl regular expression processing.
+
+**Example 1:**
 
 ```
-*
+echo "Jeff and his pet Lucky" | grep -P 'f|g'
 ```
 
-```
-*?
-```
+Result
 
 ```
-{ N }
+Jeff and his pet Lucky
+```
+
+**Example 2:**
+
+```
+echo "Gregg and his pet Lucky" | grep -P 'f|g'
+```
+
+Result
+
+```
+Gregg and his pet Lucky
+```
+
+=== Match according to a discovery expression
+
+Find one or more occurrence of a character
+
+```
+y+
+```
+
+WHERE `y` is the occurrence character 
+
+**Example 1:**
+
+```
+echo "Gregg and his pet Lucky" | grep -P 'g+'
+```
+
+Result
+
+```
+Gregg and his pet Lucky
+```
+
+**Example 2:**
+
+```
+ echo "Bobby and his pet Lucky" | grep -P 'g+'
+```
+
+Result
+
+```
+No result
+```
+
+---
+
+Find zero or more occurrence of a character
+
+```
+y*
+```
+
+WHERE `y` is the occurrence character
+
+**Example 1:**
+
+```
+echo "Gregg and his pet Lucky" | grep -P 'g*'
+```
+
+Result
+
+```
+Gregg and his pet Lucky
+```
+
+**Example 2:**
+
+```
+echo "Bobby and his pet Lucky" | grep -P 'g*'
+```
+
+Result
+
+```
+Bobby and his pet Lucky
+```
+
+---
+
+Find `N` number of occurrences of a character
+
+```
+y{N}
+```
+WHERE `y` is the occurrence character
+
+**Example 1:**
+
+```
+echo "Gregg and his pet Lucky" | grep -P 'g{2}'
+```
+
+Result
+
+```
+Gregg and his pet Lucky
+```
+
+**Example 2:**
+
+```
+echo "Gregg and his pet Lucky" | grep -P 'g{3}'
+```
+
+Result
+
+```
+No result
 ```
 
 ```
@@ -65,6 +177,8 @@ Result
 
 ```
 TO BE PROVIDED
+```
+
 ---
 
 ```
@@ -81,6 +195,8 @@ Result
 
 ```
 TO BE PROVIDED
+```
+
 ---
 
 ```
@@ -97,6 +213,8 @@ Result
 
 ```
 TO BE PROVIDED
+```
+
 ---
 
 ```
@@ -113,6 +231,8 @@ Result
 
 ```
 TO BE PROVIDED
+```
+
 ---
 
 ```
@@ -129,6 +249,8 @@ Result
 
 ```
 TO BE PROVIDED
+```
+
 ---
 
 ```
@@ -145,6 +267,8 @@ Result
 
 ```
 TO BE PROVIDED
+```
+
 ---
 
 ```
@@ -161,6 +285,8 @@ Result
 
 ```
 TO BE PROVIDED
+```
+
 ---
 
 ```
@@ -177,6 +303,8 @@ Result
 
 ```
 TO BE PROVIDED
+```
+
 ---
 
 ```
@@ -374,9 +502,37 @@ Result
 TO BE PROVIDED
 ```
 
-== Using RegEx to Search a File System
+== Using RegEx to search a File System
 
-== Using RegEx to Search a web page
+== Using RegEx to search a web page
+
+=== The HTML example file
+
+```
+cat << 'EOF' > regex-content.html
+ <html>
+ <head>
+ <title>RegEx Cheat Sheet Content
+ </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+ </head>
+ <body bgcolor="#ffffff" text="#000000">
+      <h1>Interesting People</h1>
+            <ul> 
+                  <li><div id="1">Mick Jagger<br>mick@stones.com</div></li>
+                  <li><div id="2">Joan Jett<br>joan@runaways.info</div></li>
+                  <li><div id="3">John Lennon<br>john@beatles.io</div></li>
+            </ul>
+      <h1>Uninteresting People</h1>
+            <ul> 
+                  <li><div id="4">John Doe<br>jd@uninterestingpeople.com</div></li>
+                  <li><div id="5">Jane Doe<br>jane@uninterestingpeople.com</div></li>
+                  <li><div id="6">JUninteresting Person<br>up@uninterestingpeople.com</div></li>
+            </ul>
+</body>
+</html>
+EOF
+```
 
 == Using Regex with GREP at the command line
 
