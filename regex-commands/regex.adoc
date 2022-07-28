@@ -34,7 +34,7 @@ grep -Po <regular_expression>/m
 
 == Matching characters
 
-You can match any character in a lexact declaration to match a particular character or group of characters
+You can match any character in content by using a literal declaration to match a particular character or group of characters
 
 
 **Example 1:**
