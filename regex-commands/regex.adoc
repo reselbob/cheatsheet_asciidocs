@@ -30,7 +30,7 @@ grep -Po <regular_expression>/i
 grep -Po <regular_expression>/m
 ```
 
-**WHERE** `/m` forces the `^` and `$` symbols to apply matching on a line by line basis. The `^` symbol indicates matching a character that is at the start of a line. The `$` symbol indicates matching a character that is at the end** of a line. 
+**WHERE** `/m` forces the `^` and `$` symbols to apply matching on a line by line basis. The `^` symbol indicates matching a character that is at the start of a line. The `$` symbol indicates matching a character that is at the end** of a line and not just at the end of the overall content. 
 
 == Matching characters
 
@@ -39,10 +39,10 @@ You can match any character in content by using a literal declaration to match a
 
 **Example 1:**
 
-The following example traverses the line "Jeff and his pet Lucky." looking to match the character `h`. 
+The following example traverses the line "Jeff and the pet Lucky." looking to match the character `h`. 
 
 ```
-echo "Jeff and his pet Lucky." | grep -Po 'h'
+echo "Jeff and the pet Lucky." | grep -Po 'h'
 ```
 
 Result
@@ -53,10 +53,10 @@ h
 
 **Example 2:**
 
-The following example traverses the line "Jeff and his pet Lucky." looking to match the characters `eff`. 
+The following example traverses the line "Jeff and the pet Lucky." looking to match the characters `eff`. 
 
 ```
-echo "Jeff and his pet Lucky." | grep -Po 'eff'
+echo "Jeff and the pet Lucky." | grep -Po 'eff'
 ```
 
 Result
@@ -67,10 +67,10 @@ eff
 
 **Example 3:**
 
-The following example traverses the line "Jeff and his pet Lucky." looking to match the characters `dog`. 
+The following example traverses the line "Jeff and the pet Lucky." looking to match the characters `dog`. 
 
 ```
-echo "Jeff and his pet Lucky." | grep -Po 'dog'
+echo "Jeff and the pet Lucky." | grep -Po 'dog'
 ```
 
 Result
@@ -89,10 +89,10 @@ Use the `.` symbol to match any character:
 
 **Example**
 
-The following example traverses the line "Gregg and his pet Lucky." looking to match any character. 
+The following example traverses the line "Gregg and the pet Lucky." looking to match any character. 
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po '.'
+echo "Gregg and the pet Lucky." | grep -Po '.'
 ```
 
 Result
@@ -131,15 +131,15 @@ Use the `|` symbol to declare an optional condition according to the following f
 x | y
 ```
 
-WHERE `x` is a character to match and `y` is another character to match
+**WHERE** `x` is a character to match and `y` is another character to match
 
 
 **Example 1:**
 
-The following example traverses the line "Jeff and his pet Lucky." looking to match the character `f` or the character `g`. 
+The following example traverses the line "Jeff and the pet Lucky." looking to match the character `f` or the character `g`. 
 
 ```
-echo "Jeff and his pet Lucky." | grep -Po 'f|g'
+echo "Jeff and the pet Lucky." | grep -Po 'f|g'
 ```
 
 Result
@@ -152,7 +152,7 @@ f
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po 'f|g'
+echo "Gregg and the pet Lucky." | grep -Po 'f|g'
 ```
 
 Result
@@ -170,12 +170,12 @@ Use the `^` symbol within the following pattern to find a character at the start
 ^y
 ```
 
-WHERE `y` is the character to find at the start of the given line of text.
+**WHERE** `y` is the character to find at the start of the given line of text.
 
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po '^G'
+echo "Gregg and the pet Lucky." | grep -Po '^G'
 ```
 
 Result
@@ -187,7 +187,7 @@ G
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po '^L'
+echo "Gregg and the pet Lucky." | grep -Po '^L'
 ```
 
 Result
@@ -204,12 +204,12 @@ Use the `$` symbol within the following pattern to find a character at the start
 x$
 ```
 
-WHERE `x` is the character to find at the end of the given line of text.
+**WHERE** `x` is the character to find at the end of the given line of text.
 
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po 'y$'
+echo "Gregg and the pet Lucky." | grep -Po 'y$'
 ```
 
 Result
@@ -221,7 +221,7 @@ y
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po 't$'
+echo "Gregg and the pet Lucky." | grep -Po 't$'
 ```
 
 Result
@@ -230,7 +230,7 @@ Result
 No result
 ```
 
-== Matching one or more characters according to a discovery expression
+== Matching one or more characters according to occurrence
 
 Use the `+` symbol to find one or more occurrence of a character
 
@@ -238,12 +238,12 @@ Use the `+` symbol to find one or more occurrence of a character
 y+
 ```
 
-WHERE `y` is the occurrence character 
+**WHERE** `y` is the occurrence character 
 
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po 'g+'
+echo "Gregg and the pet Lucky." | grep -Po 'g+'
 ```
 
 Result
@@ -272,12 +272,12 @@ Use the `*` symbol to find zero or more occurrence of a character.
 y*
 ```
 
-WHERE `y` is the occurrence character
+**WHERE** `y` is the occurrence character
 
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po 'g*'
+echo "Gregg and the pet Lucky." | grep -Po 'g*'
 ```
 
 Result
@@ -306,12 +306,12 @@ Find `N` number of occurrences of a character using the following format:
 y{N}
 ```
 
-WHERE `y` is the occurrence character
+**WHERE** `y` is the occurrence character
 
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po 'g{2}'
+echo "Gregg and the pet Lucky." | grep -Po 'g{2}'
 ```
 
 Result
@@ -323,7 +323,7 @@ gg
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -P 'g{3}'
+echo "Gregg and the pet Lucky." | grep -Po 'g{3}'
 ```
 
 Result
@@ -340,12 +340,12 @@ Find occurrences a minimum or maximum amount of times using the following format
 {N,M}
 ```
 
-WHERE `N` is the minimum number of times and `M` is the maximum number of times the character occurs.
+**WHERE** `N` is the minimum number of times and `M` is the maximum number of times the character occurs.
 
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po 'g{1,3}'
+echo "Gregg and the pet Lucky." | grep -Po 'g{1,3}'
 ```
 
 Result
@@ -357,7 +357,7 @@ gg
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky." | grep -Po 'g{3,5}'
+echo "Gregg and the pet Lucky." | grep -Po 'g{3,5}'
 ```
 
 Result
@@ -366,11 +366,41 @@ Result
 No result
 ```
 
+== Searching and matching content using custom condition
 
-== Standard Tokens
+**Example 1:**
+
+The following example has a RegEx expression that processes the string `Barb and the pet Lucky.` starting at the beginning of the string accepting any character but stops when it encounters the characters `rb`.
+
+```
+echo "Barb and the pet Lucky." | grep -Po '^.*rb'
+```
+
+Result
+
+```
+Barb
+```
+
+**Example 2:**
+
+The following example has a RegEx expression that processes the string `Barb and the pet Lucky.` looking for the occurrence of the character `l` and accepting all characters that follow on the `.` character is encountered. Notice that the `.` characters is declared like so `\.` to denote a period. The `\` symbol is the escape symbol. If the `\` symbol was not used, the regular expression parser would interpret the the `.` symbol to mean *any character* .
+
+
+```
+echo "Barb and the pet Lucky." | grep -Po 'L.*\.'
+```
+
+Result
+
+```
+Lucky.
+```
+
+== Searching and matching content according to a set
+
+Finding the starting word of a sentence
  
-
-
 ---
 
 ```
@@ -380,7 +410,7 @@ No result
 Example
 
 ```
-echo "Gregg and his pet Lucky.
+echo "Gregg and the pet Lucky.
 > Tommy and a his dog, Fido"
 ```
 
@@ -632,19 +662,50 @@ TO BE PROVIDED
 [0-9]
 ```
 
-Example
+**Example X:**
 
 ```
-"There are 2 cats in the box.\nThe are three dogs in the house." | grep -P '.*[0-9].*\.'
+echo "There are 2 cats in the box.\nThere are three dogs in the house." | grep -Po '[0-9]'
 ```
 
 Result
 
 ```
-TO BE PROVIDED
+2
 ```
 
 ---
+
+**Example X:**
+
+```
+echo "There are 2 cats in the box.\nThere are three dogs in the house." | grep -Po '[A-Z]'
+```
+
+Result
+
+```
+T
+T
+```
+
+---
+
+**Example X:**
+
+```
+echo "There are 2 cats in the box.\nThere are three dogs in the house." | grep -Po '\w+[s]\b'
+```
+
+Result
+
+```
+cats
+dogs
+```
+
+---
+
 
 ```
 [asdf]
