@@ -2,16 +2,47 @@
 :experimental: true
 :product-name: RegEx Cheat Sheet
 
-== Matching characters
+== Working with the `grep` command
+
+`grep` is a command line executable that filters file content or output from stdout. The `grep` command is supported by the `sh` and `bash` Linux shells. The `grep` command allows filtering using regular expressions.
+
+This cheat sheet show you how to use use a variety of regular expression patterns using `grep`.
+
+The `grep` command is executed in this cheat sheet using the `-Po` options. The option -P indicates that data will be parsed using Perl regular expression processing. The `o` option that only a matching character or string will be emitted at output from `grep`.
+
+== Understanding scope
+
+Regular expressions are evaluated according to scope. Regular expressions executed using `grep` declare scope using the following formats:
 
 ```
-Match a particular character or group of characters
+grep -Po <regular_expression>/g
 ```
+
+**WHERE** `/g` indicates global scope. Global scope applies the regular expression to all content being processed.
+
+```
+grep -Po <regular_expression>/i
+```
+
+**WHERE** `/i` indicates case insensitivity. Case insensitivity applies the regular expression to all content being processed without regard to whether the characters in the content are upper or lower case.
+
+```
+grep -Po <regular_expression>/m
+```
+
+**WHERE** `/m` forces the `^` and `$` symbols to apply matching on a line by line basis. The `^` symbol indicates matching a character that is at the start of a line. The `$` symbol indicates matching a character that is at the end** of a line. 
+
+== Matching characters
+
+You can match any character in a lexact declaration to match a particular character or group of characters
+
 
 **Example 1:**
 
+The following example traverses the line "Jeff and his pet Lucky." looking to match the character `h`. 
+
 ```
-echo "Jeff and his pet Lucky" | grep -Po 'h'
+echo "Jeff and his pet Lucky." | grep -Po 'h'
 ```
 
 Result
@@ -22,8 +53,10 @@ h
 
 **Example 2:**
 
+The following example traverses the line "Jeff and his pet Lucky." looking to match the characters `eff`. 
+
 ```
-echo "Jeff and his pet Lucky" | grep -Po 'eff'
+echo "Jeff and his pet Lucky." | grep -Po 'eff'
 ```
 
 Result
@@ -32,10 +65,12 @@ Result
 eff
 ```
 
-**Example 2:**
+**Example 3:**
+
+The following example traverses the line "Jeff and his pet Lucky." looking to match the characters `dog`. 
 
 ```
-echo "Jeff and his pet Lucky" | grep -Po 'dog'
+echo "Jeff and his pet Lucky." | grep -Po 'dog'
 ```
 
 Result
@@ -44,20 +79,67 @@ Result
 No result
 ```
 
+---
+
+Use the `.` symbol to match any character:
+
+```
+.
+```
+
+**Example**
+
+The following example traverses the line "Gregg and his pet Lucky." looking to match any character. 
+
+```
+echo "Gregg and his pet Lucky." | grep -Po '.'
+```
+
+Result
+
+```
+G
+r
+e
+g
+g
+ 
+a
+n
+d
+ 
+h
+i
+s
+ 
+p
+e
+t
+ 
+L
+u
+c
+k
+y
+```
+
 == Matching characters according to a condition
+
+Use the `|` symbol to declare an optional condition according to the following format:
 
 ```
 x | y
 ```
 
-WHERE `x` is a character and `y` is another character
+WHERE `x` is a character to match and `y` is another character to match
 
-The following examples uses the `|` to search strings piped from the `echo` command that have either the character `f` or `g`. The option `-P` indicates parsing the given string according to Perl regular expression processing and the option `o` indicates that only a matching character or string will be emitted at output within the terminal window.
 
 **Example 1:**
 
+The following example traverses the line "Jeff and his pet Lucky." looking to match the character `f` or the character `g`. 
+
 ```
-echo "Jeff and his pet Lucky" | grep -Po 'f|g'
+echo "Jeff and his pet Lucky." | grep -Po 'f|g'
 ```
 
 Result
@@ -70,7 +152,7 @@ f
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po 'f|g'
+echo "Gregg and his pet Lucky." | grep -Po 'f|g'
 ```
 
 Result
@@ -93,7 +175,7 @@ WHERE `y` is the character to find at the start of the given line of text.
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po '^G'
+echo "Gregg and his pet Lucky." | grep -Po '^G'
 ```
 
 Result
@@ -105,7 +187,7 @@ G
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po '^L'
+echo "Gregg and his pet Lucky." | grep -Po '^L'
 ```
 
 Result
@@ -127,7 +209,7 @@ WHERE `x` is the character to find at the end of the given line of text.
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po 'y$'
+echo "Gregg and his pet Lucky." | grep -Po 'y$'
 ```
 
 Result
@@ -139,7 +221,7 @@ y
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po 't$'
+echo "Gregg and his pet Lucky." | grep -Po 't$'
 ```
 
 Result
@@ -161,7 +243,7 @@ WHERE `y` is the occurrence character
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po 'g+'
+echo "Gregg and his pet Lucky." | grep -Po 'g+'
 ```
 
 Result
@@ -195,7 +277,7 @@ WHERE `y` is the occurrence character
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po 'g*'
+echo "Gregg and his pet Lucky." | grep -Po 'g*'
 ```
 
 Result
@@ -229,7 +311,7 @@ WHERE `y` is the occurrence character
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po 'g{2}'
+echo "Gregg and his pet Lucky." | grep -Po 'g{2}'
 ```
 
 Result
@@ -241,7 +323,7 @@ gg
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -P 'g{3}'
+echo "Gregg and his pet Lucky." | grep -P 'g{3}'
 ```
 
 Result
@@ -263,7 +345,7 @@ WHERE `N` is the minimum number of times and `M` is the maximum number of times 
 **Example 1:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po 'g{1,3}'
+echo "Gregg and his pet Lucky." | grep -Po 'g{1,3}'
 ```
 
 Result
@@ -275,7 +357,7 @@ gg
 **Example 2:**
 
 ```
-echo "Gregg and his pet Lucky" | grep -Po 'g{3,5}'
+echo "Gregg and his pet Lucky." | grep -Po 'g{3,5}'
 ```
 
 Result
@@ -287,45 +369,7 @@ No result
 
 == Standard Tokens
  
-The `.` symbol represents "any" character
 
-```
-.
-```
-
-Example
-
-```
-echo "Gregg and his pet Lucky" | grep -Po '.'
-```
-
-Result
-
-```
-G
-r
-e
-g
-g
- 
-a
-n
-d
- 
-h
-i
-s
- 
-p
-e
-t
- 
-L
-u
-c
-k
-y
-```
 
 ---
 
