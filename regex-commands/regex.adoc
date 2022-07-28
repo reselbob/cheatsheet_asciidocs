@@ -2,10 +2,49 @@
 :experimental: true
 :product-name: RegEx Cheat Sheet
 
+== Matching characters
 
-== Quantifiers
+```
+Match a particular character or group of characters
+```
 
-=== Match according to a condition
+**Example 1:**
+
+```
+echo "Jeff and his pet Lucky" | grep -Po 'h'
+```
+
+Result
+
+```
+h
+```
+
+**Example 2:**
+
+```
+echo "Jeff and his pet Lucky" | grep -Po 'eff'
+```
+
+Result
+
+```
+eff
+```
+
+**Example 2:**
+
+```
+echo "Jeff and his pet Lucky" | grep -Po 'dog'
+```
+
+Result
+
+```
+No result
+```
+
+== Matching characters according to a condition
 
 ```
 x | y
@@ -109,9 +148,9 @@ Result
 No result
 ```
 
-=== Match according to a discovery expression
+== Matching one or more characters according to a discovery expression
 
-Find one or more occurrence of a character
+Use the `+` symbol to find one or more occurrence of a character
 
 ```
 y+
@@ -145,7 +184,7 @@ No result
 
 ---
 
-Find zero or more occurrence of a character using the symbol `*`.
+Use the `*` symbol to find zero or more occurrence of a character.
 
 ```
 y*
@@ -179,11 +218,12 @@ No Result
 
 ---
 
-Find `N` number of occurrences of a character
+Find `N` number of occurrences of a character using the following format:
 
 ```
 y{N}
 ```
+
 WHERE `y` is the occurrence character
 
 **Example 1:**
@@ -296,7 +336,8 @@ y
 Example
 
 ```
-TO BE PROVIDED
+echo "Gregg and his pet Lucky.
+> Tommy and a his dog, Fido"
 ```
 
 Result
