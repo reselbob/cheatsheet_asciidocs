@@ -795,7 +795,57 @@ Result
 TO BE PROVIDED
 ```
 
-== Using RegEx to search a File System
+== Using RegEx to search files
+
+=== The files used for searching
+
+```
+cat << 'EOF' > one.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-url
+  namespace: mynamespace
+type: Opaque
+stringData:
+  url: <TO_BE_DETERMINED>
+EOF
+```
+
+```
+cat << 'EOF' > two.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongodb-url
+  namespace: yournamespace
+type: Opaque
+stringData:
+  url: <TO_BE_DETERMINED> 
+EOF
+```
+
+```
+cat << 'EOF' > one.txt
+I am just some plain text.
+
+But, I serve a purpose
+EOF
+```
+
+=== Searching for a string a certain files
+
+Find occurrences of the string `mysql` in all files in the present working directory that have the extension `.yaml`
+
+```
+ find . -type f -name "*.yaml" | while read myfile; do rslt="$(grep -Po 'mysql' $myfile)"; if [[ "$rslt" = mysql ]] ; then echo "$rslt is in file $myfile"; fi; done;
+```
+
+Result
+
+```
+mysql is in file ./one.yaml
+```
 
 == Using RegEx to search a web page
 
@@ -827,5 +877,47 @@ cat << 'EOF' > regex-content.html
 EOF
 ```
 
-== Using Regex with GREP at the command line
+=== Searching for content with HTML elements
+
+Search for the title of the web page
+
+```
+grep -Po '<title>[\S\s]*</title>' regex-content.html 
+```
+
+
+Search for elements within all the `<div>` tags in a web page
+
+```
+grep -Po '<div.*>.*</div>' regex-content.html 
+```
+
+Result
+```
+<div id="1">Mick Jagger<br>mick@stones.com</div>
+<div id="2">Joan Jett<br>joan@runaways.info</div>
+<div id="3">John Lennon<br>john@beatles.io</div>
+<div id="4">John Doe<br>jd@uninterestingpeople.com</div>
+<div id="5">Jane Doe<br>jane@uninterestingpeople.com</div>
+<div id="6">Uninteresting Person<br>up@uninterestingpeople.com</div>
+```
+
+---
+
+Search for elements within a `<div>` tag that have an `id` between `3` and `6`, inclusive
+
+```
+ grep -Po '<div id="[3-6]">.*</div>' regex-content.html 
+```
+
+Result
+
+```
+<div id="3">John Lennon<br>john@beatles.io</div>
+<div id="4">John Doe<br>jd@uninterestingpeople.com</div>
+<div id="5">Jane Doe<br>jane@uninterestingpeople.com</div>
+<div id="6">Uninteresting Person<br>up@uninterestingpeople.com</div>
+```
+
+
 
